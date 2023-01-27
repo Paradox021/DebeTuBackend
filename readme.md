@@ -5,11 +5,7 @@
 - express: poner el backend a la escucha en un puerto
 - nodemon: reinicio automático
 - mongoose: ORM mongoDB
-- dotenv: variables de entorno
-- morgan: logger
 
-npm i -g nodemon
-10.101.11.30
 
 ## Base de datos
 
