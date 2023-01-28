@@ -2,9 +2,7 @@ import * as userService from "../services/userService.js";
 
 const findAll = async(req, res) => {
     try{
-        // if(req.user.email!="admin@gmail.com") {
-        //     res.status(500).json({messages:'solo administradores'})
-        // }
+        // if(req.user.email!="admin@gmail.com") res.status(500).json({messages:'solo administradores'})
         const users = await userService.findAll()
         res.status(200).json(users)
     }catch(err){
