@@ -5,7 +5,7 @@ async function signIn(req, res){
     const {email, pass} = req.body
     const logged = await findByEmail(email)
     if(!logged) return res.status(400).json({message:'email o contraseña incorrecto'})
-
+    console.log(logged, pass)
     const validPassword = await logged.comparePassword(pass)
     if(!validPassword)
         return res.status(400).json({message: 'Usuario o contraseña incorrecta'})

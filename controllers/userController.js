@@ -9,6 +9,16 @@ const findAll = async(req, res) => {
         res.status(500).json({message:'error al obtener los usuarios'+err})
     }
 }
+
+const findByEmail = async(req, res) => {
+    try{
+        const user = await userService.findByEmail(req.user.email)
+        res.status(200).json(user)
+    }catch(err){
+        res.status(500).json({message:'error al obtener el usuario'+err})
+    }
+}
+
 const findById = async(req, res) => {
     try{
         const id = req.params.id
@@ -41,4 +51,4 @@ const removeAll = async(req, res) => {
 
 }
 
-export {findAll, findById, save, removeAll}
+export {findAll, findById, save, removeAll, findByEmail}
