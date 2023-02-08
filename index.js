@@ -8,6 +8,7 @@ import cors from 'cors'
 import authRouter from './routers/authRouter.js'
 import passport from 'passport'
 import passportMiddleware from './middlewares/passport.js'
+import connectionRouter from './routers/connectionRouter.js'
 
 dotenv.config()
 const app = express()
@@ -26,6 +27,7 @@ app.get('/', (req, res) => {
 app.use('/message', messageRouter)
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
+app.use('/connection', connectionRouter)
 
 async function main(){
     mongoose.set('strictQuery', true)

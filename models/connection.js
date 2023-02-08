@@ -16,9 +16,10 @@ let debtSchema = new Schema(
 let connectionSchema = new Schema(
     {
         _id: {type:Schema.ObjectId, auto:true},
-        IdCreditor: {type:Schema.ObjectId, ref:'User'},
-        IdDebtor: {type:Schema.ObjectId, ref:'User'},
-        Debts: [debtSchema]
+        creditor: {type:Schema.ObjectId, ref:'User'},
+        debtor: {type:Schema.ObjectId, ref:'User'},
+        Debts: [debtSchema],
+        active: {type: Boolean, default: true, required:true}
     },
     {
         timestamps:true,
