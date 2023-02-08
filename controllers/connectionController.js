@@ -67,7 +67,7 @@ const getMyDebtors = async (req, res) => {
         const connection = await connectionServices.getMyDebtorsFromUserId(req.user.id)
         res.status(200).json(connection)
     } catch (error) {
-        res.status(500).json({message: 'error al desconectarse de un acreedor:'+err})
+        res.status(500).json({message: 'error al desconectarse de un acreedor:'+error })
     }
 }
 
