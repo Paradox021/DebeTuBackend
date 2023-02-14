@@ -18,8 +18,18 @@ const getConnectionFromUsersIds= async(userIdCreditor, userIdDebtor) =>
         {debtor: userIdDebtor, creditor:userIdCreditor}
     )
 const getMyCreditorsFromUserId = async(userIdDebtor) =>
-        await Connection.find({debtor: userIdDebtor}).populate('creditor').populate('Debts')
+        await Connection.find({debtor: userIdDebtor}).populate('creditor')
 const getMyDebtorsFromUserId = async(userIdCreditor) =>
-        await Connection.find({creditor: userIdCreditor}).populate('debtor').populate('Debts')
+        await Connection.find({creditor: userIdCreditor}).populate('debtor')
+const addDebt = async(idConnection, debt) => {
+    const connection = await Connection.findById(idConnection)
+    connection.debts.push(debt)
+    return await connection.save()
+}
+const removeDebt = async(idConnection, idDebt) => {
+    const connection = await Connection.findById(idConnection)
+    connection.debts.pull({_id:idDebt})
+    return await connection.save()
+}
 
-export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getMyCreditorsFromUserId, getMyDebtorsFromUserId}
+export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getMyCreditorsFromUserId, getMyDebtorsFromUserId, addDebt, removeDebt}

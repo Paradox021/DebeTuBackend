@@ -59,7 +59,7 @@ const getMyCreditors = async (req, res) => {
         const connection = await connectionServices.getMyCreditorsFromUserId(req.user.id)
         res.status(200).json(connection)
     } catch (error) {
-        res.status(500).json({message: 'error al desconectarse de un acreedor:'+err})
+        res.status(500).json({message: 'error al conseguir acreedores:'+err})
     }
 }
 const getMyDebtors = async (req, res) => {
@@ -67,9 +67,33 @@ const getMyDebtors = async (req, res) => {
         const connection = await connectionServices.getMyDebtorsFromUserId(req.user.id)
         res.status(200).json(connection)
     } catch (error) {
+        res.status(500).json({message: 'error al conseguir deudores:'+error })
+    }
+}
+
+const addDebt = async (req, res) => {
+    try {
+        const debt = req.body
+        const idConnection = req.params.idConnection
+        const debtSaved = await connectionServices.addDebt(idConnection, debt)
+        res.status(200).json(debtSaved)
+    } catch (error) {
+        res.status(500).json({message: 'error al desconectarse de un acreedor:'+error })
+    }
+}
+
+const removeDebt = async (req, res) => {
+
+    try {
+        const idConnection = req.params.idConnection
+        const idDebt = req.params.idDebt
+        const debtRemoved = await connectionServices.removeDebt(idConnection, idDebt)
+        res.status(200).json(debtRemoved)
+        
+    } catch (error) {
         res.status(500).json({message: 'error al desconectarse de un acreedor:'+error })
     }
 }
 
 
-export { connectToCreditor, disconnectToCreditor, getMyCreditors, getMyDebtors}
+export { connectToCreditor, disconnectToCreditor, getMyCreditors, getMyDebtors, addDebt, removeDebt}
